@@ -1,0 +1,48 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<app-modal></app-modal> 
+<main role="main">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">GWAT Simple Task</h1>
+      <p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal">
+          Post Something Cool
+        </button>
+      </p>
+    </div>
+  </section>
+  
+  <div class="container">
+    <table class="table">
+      <tr class="card panel-default panel-open post" *ngFor = "let post of posts | paginate: { itemsPerPage: 3, currentPage: p }">
+        <div class="card-header">
+            <div class="row">
+              <div class="col-sm">
+                <b>{{post.title}}</b>
+              </div>
+              <div class="col-sm text-right">
+                {{post.category}}
+              </div>
+            </div>
+        </div>
+        <div class="card-block">
+            <div  *ngIf="post.subject != nil && post.subject.length != 0">
+              <iframe [src]="getUrl(post.subject)" width=100% height=300px>
+                  content here ...
+              </iframe>
+            </div>
+          <p class="p-3">{{post.body}}</p>
+        </div>
+      </tr>
+    </table>
+    <pagination-controls (pageChange)="p =$event"></pagination-controls>
+  </div>
+
+</main>
+
+<footer class="footer">
+    <div class="container">
+      <span class="text-muted">By Adrian Palenzuela</span>
+    </div>
+  </footer>

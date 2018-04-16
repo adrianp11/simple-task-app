@@ -1,0 +1,51 @@
+
+<!-- Modal -->
+<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="postModalLabel">New Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+      <div class="modal-body">
+        
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" formControlName="title" class="form-control" required>
+          <div class="alert" *ngIf="!rForm.controls['title'].valid && rForm.controls['title'].touched">
+            {{ titleAlert }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea formControlName="body" rows="4" class="form-control"></textarea>
+          <div class="alert" *ngIf="!rForm.controls['title'].valid && rForm.controls['title'].touched">
+            {{ titleAlert }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select formControlName="category" id="categories" >
+            <option *ngFor="let category of categories; let i = index" value="{{ i+1 }}">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Subject (Optional)</label>
+          <input type="text" formControlName="subject" class="form-control" pattern="https?://.+">
+          <div class="alert" *ngIf="rForm.controls['subject'].length == 0 || !rForm.controls['subject'].valid && rForm.controls['subject'].touched">
+            {{ titleAlert }}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" value="Post" [disabled]="!rForm.valid">
+      </div>
+    </form> 
+    </div>
+  </div>
+</div>
